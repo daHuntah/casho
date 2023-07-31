@@ -31,12 +31,21 @@ export default function Login({ route }) {
       return;
     }
 
-    let url_check_login =
-      `https://515a-202-93-156-66.ngrok-free.app/api/list?username=` +
-      username;
+    const loginData = {
+      username: username,
+    };
+
+    let url_check_login = `https://61ba-2001-ee0-41c1-3ad8-1ca3-c91a-c5e-771.ngrok-free.app/api/list`;
 
     try {
-      const response = await fetch(url_check_login);
+      const response = await fetch(url_check_login, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      });
+      
       const responseData = await response.json();
 
       if (responseData.status !== 1) {
@@ -82,10 +91,16 @@ export default function Login({ route }) {
           <Text style={styles.forgotPass}>Quên mật khẩu ?</Text>
         </TouchableOpacity>
         <Button title={"Đăng nhập"} onPress={doLogin} />
-        <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 20}}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
+        >
           <Text>Bạn chưa có tài khoản ? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={{fontWeight: 'bold'}}>Đăng kí</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text style={{ fontWeight: "bold" }}>Đăng kí</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

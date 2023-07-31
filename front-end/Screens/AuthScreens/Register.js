@@ -37,12 +37,20 @@ export default function Register() {
       return;
     }
 
+    const loginData = {username: username}
+
     let url_check_register =
-      `https://515a-202-93-156-66.ngrok-free.app/api/list?username=` +
-      username;
+      `https://61ba-2001-ee0-41c1-3ad8-1ca3-c91a-c5e-771.ngrok-free.app/api/list`;
 
     try {
-      const response = await fetch(url_check_register);
+      const response = await fetch(url_check_register, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(loginData)
+      });
+
       const responseData = await response.json();
 
       if (responseData.status === 1) {
@@ -51,7 +59,7 @@ export default function Register() {
         const objCus = { username, password, address, phonenumber }; // Tạo đối tượng khách hàng mới
 
         let url_api =
-          "https://515a-202-93-156-66.ngrok-free.app/api/reg";
+          "https://61ba-2001-ee0-41c1-3ad8-1ca3-c91a-c5e-771.ngrok-free.app/api/reg";
 
         // Gửi yêu cầu POST để đăng kí khách hàng mới
         const registerResponse = await fetch(url_api, {

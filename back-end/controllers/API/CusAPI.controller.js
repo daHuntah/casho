@@ -3,13 +3,13 @@ const MD = require("../../models/users.model");
 const API_RESPONSE = {
   SUCCESS: { status: 1, message: "Success" },
   ERROR: { status: 0, message: "Error" },
-  NOT_FOUND: { status: 0, message: "Data not found" },
+  NOT_FOUND: { status: 2, message: "Data not found" },
 };
 
 exports.listCustomers = async (req, res, next) => {
   let filter = {};
-  if (typeof req.query.username !== "undefined") {
-    filter.username = new RegExp(req.query.username, "i");
+  if (typeof req.body.username !== "undefined") {
+    filter.username = new RegExp(req.body.username, "i");
   }
   try {
     const listCustomers = await MD.UserModel.find(filter);
