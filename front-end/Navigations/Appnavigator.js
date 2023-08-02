@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,43 +8,48 @@ import Home from "../Screens/MainScreens/Home";
 import Register from "../Screens/AuthScreens/Register";
 import Profile from "../Screens/MainScreens/Profile";
 import LoadingScreen from "../Screens/LoadingScreen";
+import { View } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AuthNavigator = ({ handleLoginSuccess }) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }}
-        initialParams={{ handleLoginSuccess: handleLoginSuccess }}
-      />
-      <Stack.Screen
-        name="Register"
-        component={Register}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+          initialParams={{ handleLoginSuccess: handleLoginSuccess }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
 const MainNavigator = ({ handleLoggedOut }) => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{ headerShown: false }}
-        initialParams={{ handleLoggedOut: handleLoggedOut }}
-      />
-    </Tab.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ headerShown: false }}
+          initialParams={{ handleLoggedOut: handleLoggedOut }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
@@ -87,16 +91,16 @@ const AppNavigator = () => {
   };
 
   if (isLoading) {
-    return <LoadingScreen/>
+    return <LoadingScreen />;
   } else {
     return (
-      <NavigationContainer>
+      <View style={{ flex: 1 }}>
         {isLoggedIn ? (
           <MainNavigator handleLoggedOut={handleLoggedOut} />
         ) : (
           <AuthNavigator handleLoginSuccess={handleLoginSuccess} />
         )}
-      </NavigationContainer>
+      </View>
     );
   }
 };
