@@ -40,7 +40,7 @@ export default function Register() {
     const loginData = {username: username}
 
     let url_check_register =
-      `https://56b9-2001-ee0-41c1-3ad8-f19d-3d88-ce0f-1a4.ngrok-free.app/api/list`;
+      `https://61ba-2001-ee0-41c1-3ad8-1ca3-c91a-c5e-771.ngrok-free.app/api/list`;
 
     try {
       const response = await fetch(url_check_register, {
@@ -59,7 +59,7 @@ export default function Register() {
         const objCus = { username, password, address, phonenumber }; // Tạo đối tượng khách hàng mới
 
         let url_api =
-          "https://56b9-2001-ee0-41c1-3ad8-f19d-3d88-ce0f-1a4.ngrok-free.app/api/reg";
+          "https://61ba-2001-ee0-41c1-3ad8-1ca3-c91a-c5e-771.ngrok-free.app/api/reg";
 
         // Gửi yêu cầu POST để đăng kí khách hàng mới
         const registerResponse = await fetch(url_api, {
